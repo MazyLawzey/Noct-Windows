@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window
+    x:Class="Noct.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Noct"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="Noct">
+
+    <Window.SystemBackdrop>
+        <MicaBackdrop />
+    </Window.SystemBackdrop>
+
+    <Grid RowDefinitions="Auto,*">
+
+        <!-- Custom Title Bar -->
+        <Grid x:Name="CustomTitleBar" Grid.Row="0" Height="40" Background="{ThemeResource CardBackgroundFillColorDefault}" Padding="16,8" DoubleTapped="CustomTitleBar_DoubleTapped">
+            <Grid ColumnDefinitions="*,Auto">
+                <Button 
+                    x:Name="LogoButton"
+                    Grid.Column="0"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left"
+                    Click="LogoButton_Click"
+                    Margin="-5"
+                    Width="30"
+                    Height="30"
+                    Padding="0"
+                    Background="Transparent"
+                    BorderThickness="0">
+                    <ImageIcon 
+                        Margin="0"
+                        Width="30"
+                        Height="30"
+                        Source="ms-appx:///Assets/Logo.png"/>
+                    <Button.Flyout>
+                        <MenuFlyout>
+                            <MenuFlyoutItem Text="Add connection" Click="AddConnection_Click"/>
+                            <MenuFlyoutItem Text="Share connection" Click="ShareConnection_Click"/>
+                            <MenuFlyoutItem Text="Settings" Click="SettingsMenu_Click"/>
+                            <MenuFlyoutSeparator/>
+                            <MenuFlyoutItem Text="Exit" Click="ExitMenu_Click"/>
+                        </MenuFlyout>
+                    </Button.Flyout>
+                </Button>
+
+                <!-- Buttons Container -->
+                <Grid Grid.Column="1" ColumnDefinitions="Auto,Auto" VerticalAlignment="Center" Margin="-15">
+                    <!-- Minimize Button -->
+                    <Button Grid.Column="0" Width="40" Height="40" Padding="0" Margin="0" Click="MinimizeButton_Click" PointerEntered="MinimizeButton_PointerEntered" PointerExited="MinimizeButton_PointerExited" Background="Transparent" BorderThickness="0">
+                        <FontIcon Glyph="&#xE949;" FontSize="16" Foreground="{ThemeResource TextFillColorPrimary}"/>
+                    </Button>
+
+                    <!-- Close Button -->
+                    <Button Grid.Column="1" Width="40" Height="40" Padding="0" Margin="0" Click="CloseButton_Click" PointerEntered="CloseButton_PointerEntered" PointerExited="CloseButton_PointerExited" Background="Transparent" BorderThickness="0">
+                        <FontIcon Glyph="&#xE106;" FontSize="16" Foreground="{ThemeResource TextFillColorPrimary}"/>
+                    </Button>
+                </Grid>
+            </Grid>
+        </Grid>
+
+        <!-- Content Container -->
+        <Grid Grid.Row="1">
+            <!-- Home Section -->
+            <Grid x:Name="HomeSection" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Button 
+                    Width="200" 
+                    Height="200"
+                    Background="Transparent" 
+                    BorderThickness="0"
+                    CornerRadius="200"  
+                    Click="ConnectButton_Click">
+                        <Image
+                            Source="ms-appx:///Assets/App/server.svg" 
+                            Width="200"
+                            Height="200"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"/>
+                </Button>
+            </Grid>
+
+            <!-- Server Section -->
+            <Grid x:Name="ServerSection" Visibility="Collapsed" Padding="24,48,24,100">
+                <TextBlock 
+                    Text="Server" 
+                    FontSize="28" 
+                    FontWeight="SemiBold"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left"
+                    Foreground="{ThemeResource TextFillColorPrimary}"/>
+            </Grid>
+
+            <!-- Settings Section -->
+            <ContentControl x:Name="SettingsSection" Visibility="Collapsed"/>
+
+            <!-- Bottom Navigation Buttons - Absolute positioning at bottom -->
+            <Border CornerRadius="30" Background="#1f1f1f" Width="280" Height="60" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10">
+                <Grid ColumnDefinitions="*,*,*">
+                    <!-- Home Button -->
+                    <Button Grid.Column="0" Style="{ThemeResource TextBlockButtonStyle}" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="12" Click="HomeButton_Click">
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="8">
+                            <Image x:Name="HomeIcon" Source="ms-appx:///Assets/App/home.svg" Width="35" Height="35"/>
+                        </StackPanel>
+                    </Button>
+
+                    <!-- Servers Button -->
+                    <Button Grid.Column="1" Style="{ThemeResource TextBlockButtonStyle}" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="10" Click="ServerButton_Click">
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="8">
+                            <Image x:Name="ServerIcon" Source="ms-appx:///Assets/App/server.svg" Width="35" Height="35"/>
+                        </StackPanel>
+                    </Button>
+
+                    <!-- Settings Button -->
+                    <Button Grid.Column="2" Style="{ThemeResource TextBlockButtonStyle}" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="12" Click="SettingsButton_Click">
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="8">
+                            <Image x:Name="SettingsIcon" Source="ms-appx:///Assets/App/settings.svg" Width="35" Height="35"/>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+
+</Window>
